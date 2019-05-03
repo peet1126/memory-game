@@ -1,5 +1,5 @@
 # memory-game
-##Pseudocode 
+## Pseudocode 
 1. Initialize function  
   *16 cards face down   
   *Cards array with card img  
@@ -17,8 +17,8 @@
 4. Card matches  
   *Remove the event listener after a card match  
 5. Reset game  
-  *After clicked runs initialize function  
-##Click through 
+  *After clicked runs initialize function
+## Click through 
 1. Click 1. One card is clicked it flips over. 
 2. Click -1. Another card is clicked it flips over.
 3. Check if the cards match.
@@ -29,5 +29,5 @@
 5.Game is won when 8 matches are found.
 6.Display win message 
 7.Click reset button 
-##Wire Frame
+## Wire Frame
 [Wire frame link](https://wireframe.cc/vTwd6D)
