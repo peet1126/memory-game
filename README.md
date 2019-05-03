@@ -1,22 +1,22 @@
 # memory-game
 ##Pseudocode 
 1. Initialize function
-..*16 cards face down 
+  *16 cards face down 
 ..*Cards array with card img
 ..*Click turn = 1
 ..*Randomize cards function
-2.Game starts when any card is clicked 
+2. Game starts when any card is clicked 
 ..*Starts timer 
-3.Game ends when all cards stay face up
+3. Game ends when all cards stay face up
 ..*Ends timer 
-3.Card check function
+3. Card check function
 ..*Flip card over when clicked 
 ..*Remember if it is click 1 or -1 
 ..*If pick 1 and pick -1 are equal keep cars fase up 
 ..*Else flip both cards back over after 2 seconds
-4.Card matches
+4. Card matches
 ..*Remove the event listener after a card match
-5.Reset game
+5. Reset game
 ..*After clicked runs initialize function
 ##Click through 
 1.Click 1. One card is clicked it flips over. 
