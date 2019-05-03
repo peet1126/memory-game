@@ -1,7 +1,7 @@
 # memory-game
 ##Pseudocode 
 1. Initialize function
-  *16 cards face down 
+  *16 cards face down   
 ..*Cards array with card img
 ..*Click turn = 1
 ..*Randomize cards function
