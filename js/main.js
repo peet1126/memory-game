@@ -18,9 +18,7 @@
 
 
 /*----- functions -----*/
-
-
-const b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// the cards aka array of objects 
 const a = [
     {img: "king", identifier: 1,},
     {img: "king", identifier: 1,},
@@ -39,6 +37,7 @@ const a = [
     {img: "eight", identifier: 8,},
     {img: "eight", identifier: 8,},
 ];
+
 // shuffles an array 
 function shuffle(a) {
     var j, x, i;
@@ -51,19 +50,37 @@ function shuffle(a) {
     return a;
 }
 
-
-
-
+// sets up the board 
 function cardSet(x) {
     let index = -1;
     x.forEach(element => {
-        let newCard = document.createElement('button');
+        let newCard = document.createElement('ls');
         index += 1;
-        newCard.style.color = "red";
         newCard.textContent = x[index].img;
-        newCard.setAttribute("id", x[index]);
-        document.getElementById("info").appendChild(newCard);
-        
+        newCard.setAttribute("id", x[index].identifier);
+        newCard.setAttribute("class", "table");
+        document.getElementById("info").appendChild(newCard); 
     });
 }
 
+cardSet(shuffle(a));
+
+// create what happens after a click event
+let arrayMatch = [];
+document.getElementById('info').addEventListener('click', handleClick);
+
+function handleClick(evt) {
+    arrayMatch.push(evt.target.id);
+    if (arrayMatch.length === 2) {
+        // run win logic 
+        winLogic();
+        arrayMatch = [];
+    }  
+};
+
+function winLogic() {
+    if (arrayMatch[0] === arrayMatch[1]) {
+        console.log('match');
+    }
+};
+// if match remove event listener 

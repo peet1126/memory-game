@@ -12,7 +12,7 @@
 3. Card check function  
   * Flip card over when clicked   
   * Remember if it is click 1 or -1   
-  * If pick 1 and pick -1 are equal keep cars fase up   
+  * If pick 1 and pick -1 are equal keep cars face up   
   * Else flip both cards back over after 2 seconds  
 4. Card matches  
   * Remove the event listener after a card match  
