@@ -55,11 +55,12 @@ cardSet(shuffle(a));
 function cardSet(x) {
     let index = -1;
     x.forEach(element => {
-        let newCard = document.createElement('ls');
+        let newCard = document.createElement('li');
         index += 1;
         newCard.innerHTML = '<img src="images/back.png">'
         newCard.setAttribute("id", x[index].identifier);
         newCard.setAttribute("class", "table");
+        newCard.addEventListener('click', handleClick)
         document.getElementById("info").appendChild(newCard); 
     });
 }
@@ -67,9 +68,12 @@ function cardSet(x) {
 
 // create what happens after a click event
 let arrayMatch = [];
-document.getElementById('info').addEventListener('click', handleClick);
+// document.getElementById('info').addEventListener('click', handleClick);
 
 function handleClick(evt) {
+    console.log(evt);
+    let target = !!evt.target.id || evt.target.parentElement.id
+    console.log(target)
     arrayMatch.push(evt.target.id);
     if (arrayMatch.length === 2) {
         // run win logic 
