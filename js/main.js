@@ -20,7 +20,7 @@
 /*----- functions -----*/
 // the cards aka array of objects 
 const a = [
-    {img: "king", identifier: 1,},
+    {img: 'king', identifier: 1,},
     {img: "king", identifier: 1,},
     {img: "queen", identifier: 2,},
     {img: "queen", identifier: 2,},
@@ -49,6 +49,7 @@ function shuffle(a) {
     }
     return a;
 }
+cardSet(shuffle(a));
 
 // sets up the board 
 function cardSet(x) {
@@ -56,14 +57,13 @@ function cardSet(x) {
     x.forEach(element => {
         let newCard = document.createElement('ls');
         index += 1;
-        newCard.textContent = x[index].img;
+        newCard.innerHTML = '<img src="images/back.png">'
         newCard.setAttribute("id", x[index].identifier);
         newCard.setAttribute("class", "table");
         document.getElementById("info").appendChild(newCard); 
     });
 }
 
-cardSet(shuffle(a));
 
 // create what happens after a click event
 let arrayMatch = [];
@@ -84,3 +84,11 @@ function winLogic() {
     }
 };
 // if match remove event listener 
+
+
+
+// rest button 
+document.getElementById('reset-board').addEventListener('click', handleReset);
+function handleReset() {
+    document.location.reload(true);
+};
