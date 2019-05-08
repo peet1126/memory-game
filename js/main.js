@@ -58,7 +58,7 @@ function cardSet(x) {
         let newCard = document.createElement('li');
         index += 1;
         // newCard.innerHTML = '<img src="images/back.png">'
-        newCard.style.backgroundImage = `url(images/back.png)`
+        newCard.style.backgroundImage = `url(images/back.png)`;
         newCard.style.width = "175px";
         newCard.style.height = "279px";
         newCard.data = element.img
@@ -76,22 +76,41 @@ let arrayMatch = [];
 
 function handleClick(evt) {
     // this is either a string of inner html or the src att of the HTML element
+    let duration = 2000;
     evt.target.style.backgroundImage = evt.target.data;
+    evt.target.style.pointerEvents = 'none';
+    evt.target.classList.add('flipped-checker')
+    console.log(evt);
     arrayMatch.push(evt.target.id);
     console.log(arrayMatch);
     if (arrayMatch.length === 2) {
         // run win logic 
-        winLogic();
+        matchLogic();
         arrayMatch = [];
+        setTimeout(()=> {
+            document.querySelectorAll('.flipped-checker').forEach(item => {
+                item.style.backgroundImage = `url(images/back.png)`
+                item.classList.remove('flipped-checker')
+                item.style.pointerEvents = 'auto';
+            })
+        }, duration)
     }  
 };
 
-function winLogic() {
+let match = 0;
+function matchLogic() {
     if (arrayMatch[0] === arrayMatch[1]) {
-        console.log('match');
+        match += 1; 
+        console.log(match);
+        win();
     }
 };
-// if match remove event listener 
+
+function win() {
+    if (match === 8) {
+        alert("YOU WIN!");
+    }
+};
 
 
 
@@ -99,4 +118,5 @@ function winLogic() {
 document.getElementById('reset-board').addEventListener('click', handleReset);
 function handleReset() {
     document.location.reload(true);
+    
 };
