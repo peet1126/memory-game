@@ -20,22 +20,22 @@
 /*----- functions -----*/
 // the cards aka array of objects 
 const a = [
-    {img: 'king', identifier: 1,},
-    {img: "king", identifier: 1,},
-    {img: "queen", identifier: 2,},
-    {img: "queen", identifier: 2,},
-    {img: "hearts", identifier: 3,},
-    {img: "hearts", identifier: 3,},
-    {img: "jacks", identifier: 4,},
-    {img: "jacks", identifier: 4,},
-    {img: "ace", identifier: 5,},
-    {img: "ace", identifier: 5,},
-    {img: "ten", identifier: 6,},
-    {img: "ten", identifier: 6,},
-    {img: "nine", identifier: 7,},
-    {img: "nine", identifier: 7,},
-    {img: "eight", identifier: 8,},
-    {img: "eight", identifier: 8,},
+    {img: `url(images/KH.png)`, identifier: 1,},
+    {img: `url(images/KH.png)`, identifier: 1,},
+    {img: `url(images/QH.png)`, identifier: 2,},
+    {img: `url(images/QH.png)`, identifier: 2,},
+    {img: `url(images/JH.png)`, identifier: 3,},
+    {img: `url(images/JH.png)`, identifier: 3,},
+    {img: `url(images/AH.png)`, identifier: 4,},
+    {img: `url(images/AH.png)`, identifier: 4,},
+    {img: `url(images/10H.png)`, identifier: 5,},
+    {img: `url(images/10H.png)`, identifier: 5,},
+    {img: `url(images/9H.png)`, identifier: 6,},
+    {img: `url(images/9H.png)`, identifier: 6,},
+    {img: `url(images/8H.png)`, identifier: 7,},
+    {img: `url(images/8H.png)`, identifier: 7,},
+    {img: `url(images/7H.png)`, identifier: 8,},
+    {img: `url(images/7H.png)`, identifier: 8,},
 ];
 
 // shuffles an array 
@@ -57,7 +57,11 @@ function cardSet(x) {
     x.forEach(element => {
         let newCard = document.createElement('li');
         index += 1;
-        newCard.innerHTML = '<img src="images/back.png">'
+        // newCard.innerHTML = '<img src="images/back.png">'
+        newCard.style.backgroundImage = `url(images/back.png)`
+        newCard.style.width = "175px";
+        newCard.style.height = "279px";
+        newCard.data = element.img
         newCard.setAttribute("id", x[index].identifier);
         newCard.setAttribute("class", "table");
         newCard.addEventListener('click', handleClick)
@@ -71,10 +75,10 @@ let arrayMatch = [];
 // document.getElementById('info').addEventListener('click', handleClick);
 
 function handleClick(evt) {
-    console.log(evt);
-    let target = !!evt.target.id || evt.target.parentElement.id
-    console.log(target)
+    // this is either a string of inner html or the src att of the HTML element
+    evt.target.style.backgroundImage = evt.target.data;
     arrayMatch.push(evt.target.id);
+    console.log(arrayMatch);
     if (arrayMatch.length === 2) {
         // run win logic 
         winLogic();
