@@ -78,37 +78,53 @@ function handleClick(evt) {
     // this is either a string of inner html or the src att of the HTML element
     let duration = 2000;
     evt.target.style.backgroundImage = evt.target.data;
-    evt.target.style.pointerEvents = 'none';
-    evt.target.classList.add('flipped-checker')
+    evt.target.classList.add('flipped-checker');
+    evt.target.classList.add('match-checker');
+    document.querySelectorAll('.flipped-checker').forEach(itemX => {
+        itemX.style.pointerEvents = 'none';
+    })
     console.log(evt);
     arrayMatch.push(evt.target.id);
     console.log(arrayMatch);
     if (arrayMatch.length === 2) {
         // run win logic 
-        matchLogic();
-        arrayMatch = [];
-        setTimeout(()=> {
-            document.querySelectorAll('.flipped-checker').forEach(item => {
-                item.style.backgroundImage = `url(images/back.png)`
-                item.classList.remove('flipped-checker')
-                item.style.pointerEvents = 'auto';
+        if (matchLogic() === true) {
+            document.querySelectorAll('.match-checker').forEach(itemMatch => {
+                itemMatch.classList.remove('flipped-checker');
+                itemMatch.style.pointerEvents = 'none';
+                itemMatch.classList.remove('match-checker');
             })
-        }, duration)
-    }  
+        } else {
+                setTimeout(()=> {
+                    document.querySelectorAll('.flipped-checker').forEach(item => {
+                        item.style.backgroundImage = `url(images/back.png)`;
+                        item.classList.remove('flipped-checker');
+                        item.classList.remove('match-checker');
+                        item.style.pointerEvents = 'auto';
+                })
+                }, duration)
+            }
+        arrayMatch = [];
+    }
 };
 
 let match = 0;
 function matchLogic() {
     if (arrayMatch[0] === arrayMatch[1]) {
         match += 1; 
-        console.log(match);
+        console.log('match : ', match);
         win();
+        return true;
     }
+    return false;
 };
 
 function win() {
     if (match === 8) {
-        alert("YOU WIN!");
+        setTimeout(()=> {
+            alert("YOU WIN!");
+
+        }, duration)
     }
 };
 

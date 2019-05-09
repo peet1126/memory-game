@@ -28,3 +28,7 @@ button {
     background-color: salmon;
     border-radius: 10px
 }
+
+.match {
+ /* make it not clickable */
+}
