@@ -57,10 +57,11 @@ function cardSet(x) {
     x.forEach(element => {
         let newCard = document.createElement('li');
         index += 1;
-        // newCard.innerHTML = '<img src="images/back.png">'
         newCard.style.backgroundImage = `url(images/back.png)`;
-        newCard.style.width = "175px";
-        newCard.style.height = "279px";
+        // newCard.style.width = "175px";
+        // newCard.style.height = "279px";
+        newCard.style.backgroundPosition = "center";
+        newCard.style.backgroundSize = "cover";
         newCard.data = element.img
         newCard.setAttribute("id", x[index].identifier);
         newCard.setAttribute("class", "table");
@@ -72,45 +73,52 @@ function cardSet(x) {
 
 // create what happens after a click event
 let arrayMatch = [];
-// document.getElementById('info').addEventListener('click', handleClick);
 
 function handleClick(evt) {
+    
     // this is either a string of inner html or the src att of the HTML element
     let duration = 2000;
     evt.target.style.backgroundImage = evt.target.data;
     evt.target.classList.add('flipped-checker');
     evt.target.classList.add('match-checker');
-    document.querySelectorAll('.flipped-checker').forEach(itemX => {
-        itemX.style.pointerEvents = 'none';
-    })
-    console.log(evt);
+    
+    // document.querySelectorAll('.flipped-checker').forEach(itemX => {
+    //     itemX.style.pointerEvents = 'none';
+    // })
     arrayMatch.push(evt.target.id);
-    console.log(arrayMatch);
-    if (arrayMatch.length === 2) {
-        // run win logic 
-        if (matchLogic() === true) {
+    if (arrayMatch.length >= 2) {
+        console.log("first : ", arrayMatch)
+        document.getElementById('info').style.pointerEvents = 'none';
+        setTimeout(()=> {
+            document.getElementById('info').style.pointerEvents = 'auto';
+        }, 2000)
+        if (matchLogic(arrayMatch) === true) {
+            console.log("second : ", arrayMatch)
+            document.getElementById('info').style.pointerEvents = 'auto';
             document.querySelectorAll('.match-checker').forEach(itemMatch => {
                 itemMatch.classList.remove('flipped-checker');
-                itemMatch.style.pointerEvents = 'none';
+                itemMatch.disabled = 'true';
                 itemMatch.classList.remove('match-checker');
+                arrayMatch = []
             })
         } else {
                 setTimeout(()=> {
+                    console.log("third : ", arrayMatch)
+                    // document.getElementById('info').style.pointerEvents = 'auto';
                     document.querySelectorAll('.flipped-checker').forEach(item => {
                         item.style.backgroundImage = `url(images/back.png)`;
-                        item.classList.remove('flipped-checker');
-                        item.classList.remove('match-checker');
+                        item.classList.remove('flipped-checker', 'match-checker');
                         item.style.pointerEvents = 'auto';
+                        arrayMatch = []
                 })
                 }, duration)
             }
-        arrayMatch = [];
     }
 };
 
 let match = 0;
-function matchLogic() {
-    if (arrayMatch[0] === arrayMatch[1]) {
+function matchLogic(array) {
+    if (array[0] === array[1]) {
         match += 1; 
         console.log('match : ', match);
         win();
