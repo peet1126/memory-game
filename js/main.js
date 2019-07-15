@@ -58,8 +58,8 @@ function cardSet(x) {
         let newCard = document.createElement('li');
         index += 1;
         newCard.style.backgroundImage = `url(images/back.png)`;
-        // newCard.style.width = "175px";
-        // newCard.style.height = "279px";
+        newCard.style.width = "175px";
+        newCard.style.height = "279px";
         newCard.style.backgroundPosition = "center";
         newCard.style.backgroundSize = "cover";
         newCard.data = element.img
