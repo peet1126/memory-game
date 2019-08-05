@@ -1,146 +1,129 @@
-/*----- constants -----*/ 
+/*----- constants -----*/
 
+/*----- app's state (variables) -----*/
 
+/*----- cached element references -----*/
 
-
-/*----- app's state (variables) -----*/ 
-
-
-
-
-/*----- cached element references -----*/ 
-
-
-
-/*----- event listeners -----*/ 
-
-
-
+/*----- event listeners -----*/
 
 /*----- functions -----*/
-// the cards aka array of objects 
+// the cards aka array of objects
 const a = [
-    {img: `url(images/KH.png)`, identifier: 1,},
-    {img: `url(images/KH.png)`, identifier: 1,},
-    {img: `url(images/QH.png)`, identifier: 2,},
-    {img: `url(images/QH.png)`, identifier: 2,},
-    {img: `url(images/JH.png)`, identifier: 3,},
-    {img: `url(images/JH.png)`, identifier: 3,},
-    {img: `url(images/AH.png)`, identifier: 4,},
-    {img: `url(images/AH.png)`, identifier: 4,},
-    {img: `url(images/10H.png)`, identifier: 5,},
-    {img: `url(images/10H.png)`, identifier: 5,},
-    {img: `url(images/9H.png)`, identifier: 6,},
-    {img: `url(images/9H.png)`, identifier: 6,},
-    {img: `url(images/8H.png)`, identifier: 7,},
-    {img: `url(images/8H.png)`, identifier: 7,},
-    {img: `url(images/7H.png)`, identifier: 8,},
-    {img: `url(images/7H.png)`, identifier: 8,},
+  { img: `url(images/KH.png)`, identifier: 1 },
+  { img: `url(images/KH.png)`, identifier: 1 },
+  { img: `url(images/QH.png)`, identifier: 2 },
+  { img: `url(images/QH.png)`, identifier: 2 },
+  { img: `url(images/JH.png)`, identifier: 3 },
+  { img: `url(images/JH.png)`, identifier: 3 },
+  { img: `url(images/AH.png)`, identifier: 4 },
+  { img: `url(images/AH.png)`, identifier: 4 },
+  { img: `url(images/10H.png)`, identifier: 5 },
+  { img: `url(images/10H.png)`, identifier: 5 },
+  { img: `url(images/9H.png)`, identifier: 6 },
+  { img: `url(images/9H.png)`, identifier: 6 },
+  { img: `url(images/8H.png)`, identifier: 7 },
+  { img: `url(images/8H.png)`, identifier: 7 },
+  { img: `url(images/7H.png)`, identifier: 8 },
+  { img: `url(images/7H.png)`, identifier: 8 }
 ];
 
-// shuffles an array 
+// shuffles an array
 function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-    }
-    return a;
+  var j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
 }
 cardSet(shuffle(a));
 
-// sets up the board 
+// sets up the board
 function cardSet(x) {
-    let index = -1;
-    x.forEach(element => {
-        let newCard = document.createElement('li');
-        index += 1;
-        newCard.style.backgroundImage = `url(images/back.png)`;
-        newCard.style.width = "175px";
-        newCard.style.height = "279px";
-        newCard.style.backgroundPosition = "center";
-        newCard.style.backgroundSize = "cover";
-        newCard.data = element.img
-        newCard.setAttribute("id", x[index].identifier);
-        newCard.setAttribute("class", "table");
-        newCard.addEventListener('click', handleClick)
-        document.getElementById("info").appendChild(newCard); 
-    });
+  let index = -1;
+  x.forEach(element => {
+    let newCard = document.createElement("li");
+    index += 1;
+    newCard.style.backgroundImage = `url(images/back.png)`;
+    newCard.style.width = "175px";
+    newCard.style.height = "279px";
+    newCard.style.backgroundPosition = "center";
+    newCard.style.backgroundSize = "cover";
+    newCard.data = element.img;
+    newCard.setAttribute("id", x[index].identifier);
+    newCard.setAttribute("class", "table");
+    newCard.addEventListener("click", handleClick);
+    document.getElementById("info").appendChild(newCard);
+  });
 }
-
 
 // create what happens after a click event
 let arrayMatch = [];
+let duration = 2000;
 
 function handleClick(evt) {
-    
-    // this is either a string of inner html or the src att of the HTML element
-    let duration = 2000;
-    evt.target.style.backgroundImage = evt.target.data;
-    evt.target.classList.add('flipped-checker');
-    evt.target.classList.add('match-checker');
-    
-    // document.querySelectorAll('.flipped-checker').forEach(itemX => {
-    //     itemX.style.pointerEvents = 'none';
-    // })
-    arrayMatch.push(evt.target.id);
-    if (arrayMatch.length >= 2) {
-        console.log("first : ", arrayMatch)
-        document.getElementById('info').style.pointerEvents = 'none';
-        setTimeout(()=> {
-            document.getElementById('info').style.pointerEvents = 'auto';
-        }, 2000)
-        if (matchLogic(arrayMatch) === true) {
-            console.log("second : ", arrayMatch)
-            document.getElementById('info').style.pointerEvents = 'auto';
-            document.querySelectorAll('.match-checker').forEach(itemMatch => {
-                itemMatch.classList.remove('flipped-checker');
-                itemMatch.disabled = 'true';
-                itemMatch.classList.remove('match-checker');
-                arrayMatch = []
-            })
-        } else {
-                setTimeout(()=> {
-                    console.log("third : ", arrayMatch)
-                    // document.getElementById('info').style.pointerEvents = 'auto';
-                    document.querySelectorAll('.flipped-checker').forEach(item => {
-                        item.style.backgroundImage = `url(images/back.png)`;
-                        item.classList.remove('flipped-checker', 'match-checker');
-                        item.style.pointerEvents = 'auto';
-                        arrayMatch = []
-                })
-                }, duration)
-            }
+  // this is either a string of inner html or the src att of the HTML element
+  evt.target.style.backgroundImage = evt.target.data;
+  evt.target.classList.add("flipped-checker");
+  evt.target.classList.add("match-checker");
+
+  // document.querySelectorAll('.flipped-checker').forEach(itemX => {
+  //     itemX.style.pointerEvents = 'none';
+  // })
+  arrayMatch.push(evt.target.id);
+  if (arrayMatch.length >= 2) {
+    console.log("first : ", arrayMatch);
+    document.getElementById("info").style.pointerEvents = "none";
+    setTimeout(() => {
+      document.getElementById("info").style.pointerEvents = "auto";
+    }, 2000);
+    if (matchLogic(arrayMatch) === true) {
+      console.log("second : ", arrayMatch);
+      document.getElementById("info").style.pointerEvents = "auto";
+      document.querySelectorAll(".match-checker").forEach(itemMatch => {
+        itemMatch.classList.remove("flipped-checker");
+        itemMatch.disabled = "true";
+        itemMatch.classList.remove("match-checker");
+        arrayMatch = [];
+      });
+    } else {
+      setTimeout(() => {
+        console.log("third : ", arrayMatch);
+        // document.getElementById('info').style.pointerEvents = 'auto';
+        document.querySelectorAll(".flipped-checker").forEach(item => {
+          item.style.backgroundImage = `url(images/back.png)`;
+          item.classList.remove("flipped-checker", "match-checker");
+          item.style.pointerEvents = "auto";
+          arrayMatch = [];
+        });
+      }, duration);
     }
-};
+  }
+}
 
 let match = 0;
 function matchLogic(array) {
-    if (array[0] === array[1]) {
-        match += 1; 
-        console.log('match : ', match);
-        win();
-        return true;
-    }
-    return false;
-};
+  if (array[0] === array[1]) {
+    match += 1;
+    console.log("match : ", match);
+    win();
+    return true;
+  }
+  return false;
+}
 
 function win() {
-    if (match === 8) {
-        setTimeout(()=> {
-            alert("YOU WIN!");
+  if (match === 8) {
+    setTimeout(() => {
+      alert("YOU WIN!");
+    }, 1000);
+  }
+}
 
-        }, duration)
-    }
-};
-
-
-
-// rest button 
-document.getElementById('reset-board').addEventListener('click', handleReset);
+// rest button
+document.getElementById("reset-board").addEventListener("click", handleReset);
 function handleReset() {
-    document.location.reload(true);
-    
-};
+  document.location.reload(true);
+}
