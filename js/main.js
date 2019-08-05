@@ -1,12 +1,3 @@
-/*----- constants -----*/
-
-/*----- app's state (variables) -----*/
-
-/*----- cached element references -----*/
-
-/*----- event listeners -----*/
-
-/*----- functions -----*/
 // the cards aka array of objects
 const a = [
   { img: `url(images/KH.png)`, identifier: 1 },
@@ -38,6 +29,7 @@ function shuffle(a) {
   }
   return a;
 }
+
 cardSet(shuffle(a));
 
 // sets up the board
@@ -62,16 +54,13 @@ function cardSet(x) {
 // create what happens after a click event
 let arrayMatch = [];
 let duration = 2000;
+let playerTurns = 0;
 
 function handleClick(evt) {
-  // this is either a string of inner html or the src att of the HTML element
   evt.target.style.backgroundImage = evt.target.data;
   evt.target.classList.add("flipped-checker");
   evt.target.classList.add("match-checker");
 
-  // document.querySelectorAll('.flipped-checker').forEach(itemX => {
-  //     itemX.style.pointerEvents = 'none';
-  // })
   arrayMatch.push(evt.target.id);
   if (arrayMatch.length >= 2) {
     console.log("first : ", arrayMatch);
@@ -86,6 +75,7 @@ function handleClick(evt) {
         itemMatch.classList.remove("flipped-checker");
         itemMatch.disabled = "true";
         itemMatch.classList.remove("match-checker");
+        playerTurns += 1;
         arrayMatch = [];
       });
     } else {
@@ -96,6 +86,7 @@ function handleClick(evt) {
           item.style.backgroundImage = `url(images/back.png)`;
           item.classList.remove("flipped-checker", "match-checker");
           item.style.pointerEvents = "auto";
+          playerTurns += 1;
           arrayMatch = [];
         });
       }, duration);
@@ -117,7 +108,7 @@ function matchLogic(array) {
 function win() {
   if (match === 8) {
     setTimeout(() => {
-      alert("YOU WIN!");
+      alert(`YOU WON AFTER ${playerTurns} TURNS!`);
     }, 1000);
   }
 }
