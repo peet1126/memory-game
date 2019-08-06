@@ -106,7 +106,7 @@ function matchLogic(array) {
 }
 
 function win() {
-  if (match === 1) {
+  if (match === 8) {
     setTimeout(() => {
       let message = document.createElement("div");
       message.style.zIndex = "1";

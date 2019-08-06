@@ -14,6 +14,7 @@ body {
 
 h1 {
   justify-self: center;
+  color: white;
 }
 
 #info {
@@ -51,11 +52,13 @@ button {
   border: 7px solid salmon;
   background-color: #00a7b1;
   position: fixed;
-  padding: 250px, 100px, 250px, 100px;
-  /* width: 600px; */
-  /* height: 300px; */
+  width: 600px;
+  height: 300px;
   border-radius: 15px;
   text-align: center;
+  line-height: 300px;
+  color: white;
+  font-size: 2em;
   top: 25%;
   left: 27%;
 }
