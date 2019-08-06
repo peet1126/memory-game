@@ -81,7 +81,6 @@ function handleClick(evt) {
     } else {
       setTimeout(() => {
         console.log("third : ", arrayMatch);
-        // document.getElementById('info').style.pointerEvents = 'auto';
         document.querySelectorAll(".flipped-checker").forEach(item => {
           item.style.backgroundImage = `url(images/back.png)`;
           item.classList.remove("flipped-checker", "match-checker");
@@ -113,7 +112,6 @@ function win() {
       message.setAttribute("class", "message");
       message.textContent = `YOU WON IN ${playerTurns} TURNS!`;
       document.getElementById("main-box").appendChild(message);
-      //   alert(`YOU WON AFTER ${playerTurns} TURNS!`);
     }, 1000);
   }
 }
