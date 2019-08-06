@@ -46,3 +46,16 @@ button {
   border-radius: 10px;
   margin: 10px;
 }
+
+.message {
+  border: 7px solid salmon;
+  background-color: #00a7b1;
+  position: fixed;
+  padding: 250px, 100px, 250px, 100px;
+  /* width: 600px; */
+  /* height: 300px; */
+  border-radius: 15px;
+  text-align: center;
+  top: 25%;
+  left: 27%;
+}

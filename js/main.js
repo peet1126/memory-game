@@ -106,9 +106,14 @@ function matchLogic(array) {
 }
 
 function win() {
-  if (match === 8) {
+  if (match === 1) {
     setTimeout(() => {
-      alert(`YOU WON AFTER ${playerTurns} TURNS!`);
+      let message = document.createElement("div");
+      message.style.zIndex = "1";
+      message.setAttribute("class", "message");
+      message.textContent = `YOU WON IN ${playerTurns} TURNS!`;
+      document.getElementById("main-box").appendChild(message);
+      //   alert(`YOU WON AFTER ${playerTurns} TURNS!`);
     }, 1000);
   }
 }
