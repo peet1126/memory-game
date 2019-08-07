@@ -39,11 +39,12 @@ function cardSet(x) {
     let newCard = document.createElement("li");
     index += 1;
     newCard.style.backgroundImage = `url(images/back.png)`;
-    newCard.style.width = "175px";
-    newCard.style.height = "279px";
-    newCard.style.backgroundPosition = "center";
-    newCard.style.backgroundSize = "cover";
+    // newCard.style.width = "175px";
+    // newCard.style.height = "279px";
+    // newCard.style.backgroundPosition = "center";
+    // newCard.style.backgroundSize = "cover";
     newCard.data = element.img;
+    // newCard.style.backfaceVisibility = "hidden";
     newCard.setAttribute("id", x[index].identifier);
     newCard.setAttribute("class", "table");
     newCard.addEventListener("click", handleClick);
@@ -58,6 +59,8 @@ let playerTurns = 0;
 
 function handleClick(evt) {
   evt.target.style.backgroundImage = evt.target.data;
+  //   evt.target.style.backfaceVisibility = "hidden";
+  evt.target.style.transform = "rotateY(180deg)";
   evt.target.classList.add("flipped-checker");
   evt.target.classList.add("match-checker");
 
@@ -83,6 +86,7 @@ function handleClick(evt) {
         console.log("third : ", arrayMatch);
         document.querySelectorAll(".flipped-checker").forEach(item => {
           item.style.backgroundImage = `url(images/back.png)`;
+          item.style.backfaceVisibility = "hidden";
           item.classList.remove("flipped-checker", "match-checker");
           item.style.pointerEvents = "auto";
           playerTurns += 1;
