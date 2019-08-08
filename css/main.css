@@ -31,8 +31,6 @@ h1 {
 }
 
 .table {
-  /* width: 175px;
-  height: 279px; */
   background-position: center;
   background-size: cover;
   border-radius: 10px;
@@ -41,7 +39,7 @@ h1 {
   justify-self: center;
   list-style: none;
   transform-style: preserve-3d;
-  transition: all 0.8s ease;
+  transition: 0.8s ease;
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
@@ -52,15 +50,6 @@ h1 {
 
 .backOfCard {
   transform: rotateY(360deg);
-  width: 175px;
-  height: 279px;
-  background-position: center;
-  background-size: cover;
-  border-radius: 10px;
-  height: 279px;
-  width: 175px;
-  justify-self: center;
-  list-style: none;
 }
 
 button {
