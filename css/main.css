@@ -31,9 +31,8 @@ h1 {
 }
 
 .table {
-  background-color: skyblue;
-  width: 175px;
-  height: 279px;
+  /* width: 175px;
+  height: 279px; */
   background-position: center;
   background-size: cover;
   border-radius: 10px;
@@ -43,7 +42,25 @@ h1 {
   list-style: none;
   transform-style: preserve-3d;
   transition: all 0.8s ease;
-  backface-visibility: hidden;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.backOfCard {
+  transform: rotateY(360deg);
+  width: 175px;
+  height: 279px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  height: 279px;
+  width: 175px;
+  justify-self: center;
+  list-style: none;
 }
 
 button {
